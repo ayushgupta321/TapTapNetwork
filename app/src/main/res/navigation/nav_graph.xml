@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/home2">
+    <fragment
+        android:id="@+id/home2"
+        android:name="com.example.myapplication.Home"
+        android:label="Home"
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_home2_to_aboutpage"
+            app:destination="@id/aboutpage" />
+    </fragment>
+    <fragment
+        android:id="@+id/mainProfile"
+        android:name="com.example.myapplication.MainProfile"
+        android:label="Profile"
+        tools:layout="@layout/fragment_main_profile" >
+        <action
+            android:id="@+id/action_mainProfile_to_profile"
+            app:destination="@id/profile"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+    </fragment>
+    <fragment
+        android:id="@+id/play2"
+        android:name="com.example.myapplication.play"
+        android:label="Play"
+        tools:layout="@layout/fragment_play" />
+    <fragment
+        android:id="@+id/aboutpage"
+        android:name="com.example.myapplication.Aboutpage"
+        android:label="About"
+        tools:layout="@layout/fragment_aboutpage" />
+    <fragment
+        android:id="@+id/profile"
+        android:name="com.example.myapplication.profile"
+        android:label="Capture"
+        tools:layout="@layout/fragment_profile" />
+</navigation>
