@@ -1,8 +1,10 @@
 package com.example.myapplication
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
@@ -13,20 +15,30 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.firebase.ui.auth.AuthUI
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.ktx.toObjects
 import kotlinx.android.synthetic.main.activity_main.*
 
 
 class MainActivity : AppCompatActivity() {
 
 
+
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.actionbar_profile,menu)
+        menuInflater.inflate(R.menu.actionbar_profile, menu)
         return super.onCreateOptionsMenu(menu)
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        if (item?.itemId == R.id.info_button )
+        if (item?.itemId == R.id.info_button)
             findNavController(R.id.nav_host_fragment).navigate(R.id.action_home2_to_aboutpage)
+        else if (item?.itemId == R.id.logout_button) {
+            signOut()
+        }
+
+
+
         return super.onOptionsItemSelected(item)
     }
 
@@ -43,7 +55,7 @@ class MainActivity : AppCompatActivity() {
 
         supportFragmentManager.beginTransaction().setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN).commit()
 
-        val navView : BottomNavigationView = findViewById(R.id.bottomnav)
+        val navView: BottomNavigationView = findViewById(R.id.bottomnav)
 
         val navController = findNavController((R.id.nav_host_fragment))
         navController.setGraph(R.navigation.nav_graph)
@@ -54,10 +66,33 @@ class MainActivity : AppCompatActivity() {
                 )
         )
 
-        setupActionBarWithNavController(navController,appBarConfiguration)
+        setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
 
 
 
+
+
+
+
+
     }
+
+    private fun signOut() {
+        AuthUI.getInstance()
+                .signOut(this)
+                .addOnCompleteListener {
+
+                    startActivity(Intent(this, Splash::class.java))
+                    finish()
+
+
+                }
+
+    }
+
+
+
 }
+
+

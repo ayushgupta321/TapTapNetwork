@@ -34,7 +34,7 @@ class MainProfile : Fragment() {
             val res = show?.get(0)
 
             UserName.text = res?.name
-            level_text.text = res?.level.toString()
+            level_text.text = "Level:" + res?.level.toString()
             email_text.text = res?.email
 
         }

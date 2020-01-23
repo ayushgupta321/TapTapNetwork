@@ -12,6 +12,9 @@
         <action
             android:id="@+id/action_home2_to_aboutpage"
             app:destination="@id/aboutpage" />
+        <action
+            android:id="@+id/action_home2_to_create_post"
+            app:destination="@id/create_post" />
     </fragment>
     <fragment
         android:id="@+id/mainProfile"
@@ -41,4 +44,13 @@
         android:name="com.example.myapplication.profile"
         android:label="Capture"
         tools:layout="@layout/fragment_profile" />
+    <fragment
+        android:id="@+id/create_post"
+        android:name="com.example.myapplication.create_post"
+        android:label="fragment_create_post"
+        tools:layout="@layout/fragment_create_post" >
+        <action
+            android:id="@+id/create_to_home"
+            app:destination="@id/home2" />
+    </fragment>
 </navigation>

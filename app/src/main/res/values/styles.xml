@@ -8,4 +8,16 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
-</resources>
+    <style name="AuthenticationTheme" parent="FirebaseUI">
+            <item name="windowActionBar">false</item>
+            <item name="windowNoTitle">true</item>
+            <item name="colorPrimary">@color/colorPrimary</item>
+            <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+            <item name="colorAccent">@color/colorAccent</item>
+            <item name="colorControlNormal">@color/colorPrimary</item>
+            <item name="colorControlActivated">@color/second</item>
+            <item name="colorControlHighlight">@color/bg</item>
+    </style>
+
+
+    </resources>

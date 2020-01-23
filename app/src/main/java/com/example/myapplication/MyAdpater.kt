@@ -40,10 +40,10 @@ RecyclerView.ViewHolder(inflater.inflate(R.layout.list_item, parent, false)) {
     }
 
     fun bind(post: Post) {
-        user?.text = post.username
-        post_text?.text = post.postText
-        post_image?.setImageResource(post.imgsrc)
-    }
+        user?.text = post.post_user_name
+        post_text?.text = post.post_text
+        GlideApp.with(itemView.context).load(post.img_url).into(post_image!!)
 
+    }
 
 }

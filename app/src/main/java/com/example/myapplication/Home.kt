@@ -1,7 +1,9 @@
 package com.example.myapplication
 
 
+import android.content.Context
 import android.os.Bundle
+import android.util.Log
 
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
@@ -11,7 +13,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.Toast
+import android.widget.Toast.LENGTH_SHORT
 import androidx.navigation.fragment.NavHostFragment.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.firestore
@@ -26,7 +31,8 @@ import kotlinx.android.synthetic.main.fragment_home.*
  */
 
 
-data class Post(val postId: Int,val username: String,val postText: String,val imgsrc: Int)
+
+
 
 
 
@@ -34,19 +40,20 @@ data class Post(val postId: Int,val username: String,val postText: String,val im
 class Home : Fragment() {
 
 
-
-
-    private val posts = listOf<Post>(
-             Post(0, "User 1","This is my first post",R.mipmap.ss1),
-             Post(1,"User 2","Yay! I won my tournament",R.mipmap.ss2)
+    public var posts = listOf<Post>(
     )
-
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
 
 
         val view = inflater.inflate(R.layout.fragment_home, container, false)
+
+        val btn1 = view.findViewById<Button>(R.id.create)
+
+        btn1.setOnClickListener { findNavController(nav_host_fragment).navigate(R.id.action_home2_to_create_post) }
+
+
 
 
         return view
@@ -56,8 +63,23 @@ class Home : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        recycler_view.apply { layoutManager = LinearLayoutManager(activity)
-            adapter = MyAdapter(posts)
+
+        val datab = FirebaseFirestore.getInstance()
+
+        val query = datab.collection("posts").limit(5).get().addOnSuccessListener { result ->
+
+            val newposts = result.toObjects<Post>()
+
+            posts += newposts
+
+            Log.i("my","Aa toh raha hai")
+
+            recycler_view.apply { layoutManager = LinearLayoutManager(activity)
+                adapter = MyAdapter(posts)
+
+
+
+            }
         }
     }
 
